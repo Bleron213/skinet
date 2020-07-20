@@ -49,12 +49,11 @@ namespace API
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
 
-            app.UseStaticFiles();
-
             app.UseCors("CorsPolicy");
+
             app.UseAuthorization();
 
             app.UseSwaggerDocumentation();
