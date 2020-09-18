@@ -1,5 +1,6 @@
 using API.Dtos;
 using AutoMapper;
+using Core.Entities;
 using Core.Entities.Identity;
 using Core.Entitites;
 
@@ -15,6 +16,8 @@ namespace API.Helpers
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductUrlResolver>()); // property we want to affect and the property we want the effect from
 
             CreateMap<Address,AddressDto>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>();
+            CreateMap<BasketItemDto, BasketItem>();
         }
     }
 }
