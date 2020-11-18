@@ -1,6 +1,7 @@
+import { IAddress } from './../shared/models/address';
 import { Router } from '@angular/router';
 import { IUser } from './../shared/models/user';
-import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -59,7 +60,7 @@ export class AccountService {
       );
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
@@ -67,5 +68,13 @@ export class AccountService {
 
   checkEmailExists(email: string) {
     return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
+  }
+
+  getUserAddress(): Observable<any>{
+    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+  }
+
+  UpdateUserAddress(address: IAddress): Observable<any> {
+    return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
   }
 }
